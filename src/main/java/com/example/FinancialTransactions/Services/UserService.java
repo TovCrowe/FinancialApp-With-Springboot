@@ -54,7 +54,7 @@ public class UserService {
             user.setPasswordHash(hashPassword);
         }
 
-    return     userRepository.save(user);
+        return userRepository.save(user);
     }
     @Transactional
     public UserModel editUser(UserModel user,Long id) {
