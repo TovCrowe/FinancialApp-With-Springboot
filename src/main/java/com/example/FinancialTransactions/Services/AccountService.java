@@ -21,9 +21,10 @@ public class AccountService {
         this.accountRepository = accountRepository;
     }
 
-    public List<AccountModel> getAllAccounts(){
+    public List<AccountModel> getAllAccounts() {
         return accountRepository.findAll();
     }
+
     public AccountModel getAccountById(Long id) {
         if (id == null) {
             throw new IllegalArgumentException("Account id cannot be null");
@@ -39,23 +40,23 @@ public class AccountService {
     }
 
     @Transactional
-    public AccountModel createAccount(AccountModel account){
-        if(account == null){
+    public AccountModel createAccount(AccountModel account) {
+        if (account == null) {
             throw new IllegalArgumentException("Id cannot be null");
         }
-        if(account.getUser() == null){
+        if (account.getUser() == null) {
             throw new IllegalArgumentException("User cannot be null");
         }
-        if(account.getAccountNumber() == null){
+        if (account.getAccountNumber() == null) {
             throw new IllegalArgumentException("Account Number cannot be null");
         }
-        if(account.getBalance() == null){
+        if (account.getBalance() == null) {
             throw new IllegalArgumentException("Balance cannot be null");
         }
-        if(account.getAccountType().isEmpty()){
+        if (account.getAccountType().isEmpty()) {
             account.setAccountType("Normal");
         }
-        if(account.getCurrencyCode().isEmpty()){
+        if (account.getCurrencyCode().isEmpty()) {
             account.setCurrencyCode("USD");
         }
         return accountRepository.save(account);
@@ -81,13 +82,14 @@ public class AccountService {
 
         return accountRepository.save(existingAccount);
     }
+
     @Transactional
-    public void deleteAccount(Long id){
-        if(id == null){
+    public void deleteAccount(Long id) {
+        if (id == null) {
             throw new IllegalArgumentException("Account id cannot be null");
         }
         Optional<AccountModel> account = accountRepository.findById(id);
-        if(!account.isPresent()){
+        if (!account.isPresent()) {
             throw new AccountNotFoundException("Account cannot be found with id: " + id);
         }
         accountRepository.deleteById(id);
