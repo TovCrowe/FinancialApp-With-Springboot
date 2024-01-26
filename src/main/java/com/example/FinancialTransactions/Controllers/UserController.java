@@ -15,19 +15,20 @@ import org.springframework.web.servlet.function.EntityResponse;
 import javax.swing.text.html.parser.Entity;
 import java.util.List;
 
-@RestController("/users")
+@RestController
+@RequestMapping("/users")
 public class UserController {
     private final UserService userService;
     @Autowired
     public UserController(UserService userService) {
         this.userService = userService;
     }
-    @GetMapping("/users")
+    @GetMapping
     public ResponseEntity<List<UserModel>> getAllUsers() {
         List<UserModel> users = userService.getAllUsers();
         return ResponseEntity.ok(users);
     }
-    @GetMapping("/users/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<UserModel> getUserById(@PathVariable Long id){
         try {
             UserModel user = userService.getUserById(id);
