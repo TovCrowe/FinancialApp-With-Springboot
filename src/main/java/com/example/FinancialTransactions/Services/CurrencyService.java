@@ -22,11 +22,11 @@ public class CurrencyService {
         return currencyRepository.findAll();
     }
 
-    public CurrencyModel getCurrencyById(Long id) {
+    public CurrencyModel getCurrencyById(String id) {
         if (id == null) {
             throw new IllegalArgumentException("Id cannot be null");
         }
-        Optional<CurrencyModel> currency = currencyRepository.findById(id);
+        Optional<CurrencyModel> currency = currencyRepository.findByName(id);
 
         if (!currency.isPresent()) {
             throw new CurrencyNotFoundException("Currency cannot be found with id: " + id);
@@ -55,8 +55,8 @@ public class CurrencyService {
     }
 
 
-    public CurrencyModel editCurrency(Long id, CurrencyModel updatedCurrency) {
-        if (id == null || id <= 0) {
+    public CurrencyModel editCurrency(String id, CurrencyModel updatedCurrency) {
+        if (id == null) {
             throw new IllegalArgumentException("Invalid Currency ID");
         }
 
@@ -64,7 +64,7 @@ public class CurrencyService {
             throw new IllegalArgumentException("Updated currency information cannot be null");
         }
 
-        Optional<CurrencyModel> existingCurrency = currencyRepository.findById(id);
+        Optional<CurrencyModel> existingCurrency = currencyRepository.findByName(id);
         if (existingCurrency.isEmpty()) {
             throw new CurrencyNotFoundException("Currency not found with ID: " + id);
         }
@@ -82,16 +82,16 @@ public class CurrencyService {
     }
 
 
-    public void deleteCurrency(Long id) {
+    public void deleteCurrency(String id) {
 
         if (id == null) {
             throw new IllegalArgumentException("Id cannot be null");
         }
-        Optional<CurrencyModel> currency = currencyRepository.findById(id);
+        Optional<CurrencyModel> currency = currencyRepository.findByName(id);
         if (!currency.isPresent()) {
             throw new CurrencyNotFoundException("Currency cannot be found with id: " + id);
         }
-        currencyRepository.deleteById(id);
+        currencyRepository.deleteByName(id);
     }
 
 }

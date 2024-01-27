@@ -9,16 +9,18 @@ import java.math.BigDecimal;
 
 @Entity
 @Table(name = "currencies")
-public class CurrencyModel{
+public class CurrencyModel {
     @Id
-    @Column(length = 3)
+    @Column(name = "currency_code")
     private String currencyCode;
 
-    @Column(length = 50)
+    @Column(name = "description")
     private String description;
 
-    @Column(precision = 10, scale = 4)
+    @Column(name = "exchange_rate")
     private BigDecimal exchangeRate;
+
+
 
     public CurrencyModel() {
     }

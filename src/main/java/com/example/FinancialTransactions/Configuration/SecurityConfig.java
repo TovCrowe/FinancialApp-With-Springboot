@@ -17,6 +17,9 @@ public class SecurityConfig {
                 .authorizeHttpRequests((requests) -> requests
                         .requestMatchers("/users/**").permitAll()
                         .requestMatchers("/accounts/**").permitAll()
+                        .requestMatchers("/currencies/**").permitAll()
+                        .requestMatchers("/transactions/**").permitAll()
+                        .requestMatchers(HttpMethod.OPTIONS).permitAll() // Allows preflight requests for CORS
                         .anyRequest().authenticated()
                 )
                 .csrf(csrf -> csrf.disable()) // Disabling CSRF using the new method
