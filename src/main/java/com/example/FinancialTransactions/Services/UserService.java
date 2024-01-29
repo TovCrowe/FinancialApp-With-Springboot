@@ -3,7 +3,7 @@ package com.example.FinancialTransactions.Services;
 import com.example.FinancialTransactions.Exceptions.UserNotFoundException;
 import com.example.FinancialTransactions.Models.UserModel;
 import com.example.FinancialTransactions.Repositorys.UserRepository;
-import com.example.FinancialTransactions.Utilities.PasswordHash;
+import com.example.FinancialTransactions.Configuration.PasswordHash;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
